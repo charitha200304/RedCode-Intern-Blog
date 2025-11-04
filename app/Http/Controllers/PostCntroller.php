@@ -11,7 +11,7 @@ class PostCntroller extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['category', 'tags'])->latest()->get();
+        $posts = Post::with(['category', 'tags'])->latest()->paginate(5);
 
         return Inertia::render('Frontend/Posts', [
             'posts' => $posts

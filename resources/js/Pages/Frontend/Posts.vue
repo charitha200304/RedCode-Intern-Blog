@@ -49,11 +49,11 @@
             </div>
 
             <div
-                v-if="posts.length > 0"
+                v-if="posts.data.length > 0"
                 class="space-y-6"
             >
                 <div
-                    v-for="post in posts"
+                    v-for="post in posts.data"
                     :key="post.id"
                     class="bg-stone-100 border border-stone-300 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden transform hover:translate-y-[-2px]"
                 >
@@ -144,6 +144,26 @@
                 </div>
             </div>
 
+            <!-- Pagination Links -->
+            <div v-if="posts.links.length > 3" class="mt-12 flex justify-center">
+                <div class="flex flex-wrap -mb-1">
+                    <template v-for="(link, key) in posts.links" :key="key">
+                        <div
+                            v-if="link.url === null"
+                            class="mr-1 mb-1 px-4 py-3 text-sm leading-4 text-gray-400 border rounded-lg bg-white shadow-sm"
+                            v-html="link.label"
+                        />
+                        <Link
+                            v-else
+                            class="mr-1 mb-1 px-4 py-3 text-sm leading-4 border rounded-lg hover:bg-orange-600 hover:text-white transition-colors duration-200 shadow-sm bg-white"
+                            :class="{ 'bg-orange-600 text-white': link.active }"
+                            :href="link.url"
+                            v-html="link.label"
+                        />
+                    </template>
+                </div>
+            </div>
+
             <div
                 v-else
                 class="text-center py-20 bg-stone-100 rounded-2xl border border-stone-300 shadow-lg"
@@ -169,12 +189,12 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/vue3";
+import { useForm, Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     posts: {
-        type: Array,
-        default: () => [],
+        type: Object,
+        default: () => ({}),
     },
 });
 
