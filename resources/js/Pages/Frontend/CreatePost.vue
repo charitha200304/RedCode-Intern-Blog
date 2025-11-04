@@ -67,6 +67,22 @@
                         </p>
                     </div>
 
+                    <div class="mb-8">
+                        <label
+                            for="tags"
+                            class="block text-lg font-semibold text-stone-700 mb-3"
+                        >
+                            Tags (comma-separated)
+                        </label>
+                        <input
+                            id="tags"
+                            v-model="form.tags"
+                            type="text"
+                            class="w-full px-5 py-3.5 bg-white border-2 border-stone-300 text-stone-800 rounded-xl focus:ring-4 focus:ring-orange-500 focus:border-orange-500 transition-all placeholder-stone-400 text-lg"
+                            placeholder="e.g., Laravel, Vue, TailwindCSS"
+                        />
+                    </div>
+
                     <div class="mb-10">
                         <label
                             for="body"
@@ -150,10 +166,14 @@ const form = useForm({
     title: "",
     body: "",
     category_id: "",
+    tags: "",
 });
 
 const submit = () => {
-    form.post(route("posts.store"), {
+    form.transform((data) => ({
+        ...data,
+        tags: data.tags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0),
+    })).post(route("posts.store"), {
         onSuccess: () => {
             form.reset();
         },

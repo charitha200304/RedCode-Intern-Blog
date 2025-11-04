@@ -78,9 +78,23 @@
                             </span>
                         </div>
 
-                        <span class="inline-block bg-orange-200 text-orange-900 text-sm font-semibold mb-6 px-3 py-1 rounded-full">
+                        <span class="inline-block bg-orange-200 text-orange-900 text-sm font-semibold mb-3 px-3 py-1 rounded-full">
                             {{ post.category.name }}
                         </span>
+
+                        <!-- Tags Display -->
+                        <div
+                            v-if="post.tags && post.tags.length > 0"
+                            class="flex flex-wrap gap-2 mb-6"
+                        >
+                            <span
+                                v-for="tag in post.tags"
+                                :key="tag.id"
+                                class="inline-flex items-center bg-purple-600 text-white px-2 py-1 rounded-full text-xs font-semibold"
+                            >
+                                🏷 {{ tag.name }}
+                            </span>
+                        </div>
 
                         <p class="text-stone-700 mb-6 line-clamp-3 leading-relaxed">
                             {{ post.body }}
