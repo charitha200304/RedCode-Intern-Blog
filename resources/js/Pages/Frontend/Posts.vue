@@ -21,7 +21,13 @@
                 </div>
             </div>
 
-            <div class="text-center mb-12">
+            <div class="mb-8 text-right">
+    <form method="POST" action="/logout" style="display: inline;">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Logout</button>
+    </form>
+</div>
+<div class="text-center mb-12">
                 <h1 class="text-6xl font-extrabold text-stone-800 mb-4">The Blog Feed</h1>
                 <p class="text-xl text-stone-600">Read the latest articles from our community.</p>
             </div>

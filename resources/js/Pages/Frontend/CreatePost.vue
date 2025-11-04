@@ -13,7 +13,9 @@
             <div
                 class="bg-stone-100 border border-stone-300 rounded-3xl shadow-xl p-10 lg:p-12"
             >
-                <form @submit.prevent="submit">
+
+
+<form @submit.prevent="submit">
                     <div class="mb-8">
                         <label
                             for="title"
