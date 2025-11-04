@@ -10,7 +10,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true; // Authentication check කරන්න නම් මෙතන logic එකතු කරන්න
+        return true;
     }
 
     /**
